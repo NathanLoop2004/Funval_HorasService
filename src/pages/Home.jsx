@@ -1,8 +1,12 @@
+import { useState } from "react";
 import DefaultButton from "../Components/Home/DefaultButton";
+import ServiceInfo from "../Components/Home/ServiceInfo";
 
 /* Componente hecho por Tomás */
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleClick = () => {
     console.log("click!");
   };
@@ -171,6 +175,7 @@ export default function Home() {
           </button>
         </div>
       </div>
+      {/* <ServiceInfo isOpen={isOpen} /> */}
       <div className="w-full h-[180px] bg-[#13131380] mt-[18px]">
         este es un placeholder para el footer
       </div>
