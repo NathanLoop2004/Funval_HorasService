@@ -1,14 +1,21 @@
 import { useState } from "react";
 import DefaultButton from "../Components/Home/DefaultButton";
 import ServiceInfo from "../Components/Home/ServiceInfo";
+import HoursModal from "../Components/Home/HoursModal";
 
 /* Componente hecho por Tomás */
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenHours, setIsOpenHours] = useState(false);
 
   const handleClick = () => {
     console.log("click!");
+  };
+
+  const handleHoursModal = () => {
+    setIsOpenHours((prev) => {
+      return !prev;
+    });
   };
 
   return (
@@ -23,7 +30,7 @@ export default function Home() {
           image={"/homepage_service_bg.webp"}
         />
         <DefaultButton
-          action={handleClick}
+          action={handleHoursModal}
           text={"Ver horas de servicio"}
           image={"/homepage_service_bg2.webp"}
         />
@@ -176,6 +183,7 @@ export default function Home() {
         </div>
       </div>
       {/* <ServiceInfo isOpen={isOpen} /> */}
+      <HoursModal isOpenHours={isOpenHours} closeModal={handleHoursModal} />
     </div>
   );
 }
