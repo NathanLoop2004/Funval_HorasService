@@ -1,5 +1,7 @@
 import { Outlet } from "react-router-dom";
 
+// Componente creado por Tomás
+
 export default function HeaderFooter() {
   return (
     <>
