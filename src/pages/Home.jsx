@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="w-full h-[70px] bg-[#13131380]">
+      <div className="w-full h-[70px] bg-[#fff]">
         este es un placeholder para el header
       </div>
       <div className="grid grid-cols-1 justify-items-center w-full max-w-[320px] sm:grid-cols-2 sm:max-w-[640px]">
@@ -171,14 +171,11 @@ export default function Home() {
             </button>
           </div>
           <button className="text-[#dadada] text-[20px] bg-[#0f47ad] px-3 py-2 my-[25px] rounded-lg hover:cursor-pointer hover:scale-105 ease-in-out duration-100">
-            Volver al inicio
+            <a href="#">Volver al inicio</a>
           </button>
         </div>
       </div>
       {/* <ServiceInfo isOpen={isOpen} /> */}
-      <div className="w-full h-[180px] bg-[#13131380] mt-[18px]">
-        este es un placeholder para el footer
-      </div>
     </div>
   );
 }
