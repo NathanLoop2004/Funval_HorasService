@@ -23,7 +23,10 @@ export default function HoursModal({ isOpenHours, closeModal }) {
         <p className="text-[24px] px-5 font-semibold text-[#fff] bg-[#0f47ad] text-center sm:text-[30px] sm:px-15 rounded-xl mb-5">
           Horas de servicio reportadas
         </p>
-        <div className="bg-[#d3d3d3] h-[65%] w-[90%] max-w-[850px] overflow-scroll scroll-hidden">
+        <div className="bg-[#d3d3d3] h-[65%] w-[90%] max-w-[850px] grid grid-cols-1 justify-items-center overflow-scroll scroll-hidden">
+          <ServiceCard />
+          <ServiceCard />
+          <ServiceCard />
           <ServiceCard />
         </div>
         <button className="text-[30px] font-semibold text-[#fff] px-[13px] bg-[#0f47ad] flex items-center justify-center rounded-xl mt-[10px] hover:cursor-pointer hover:scale-110 ease-in-out duration-100">
