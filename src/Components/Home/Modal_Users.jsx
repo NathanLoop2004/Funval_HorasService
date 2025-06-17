@@ -1,13 +1,21 @@
 import React from 'react'
 
-export default function Modal_Users() {
+export default function Modal_Users({toggleModal}) {
   
+
+  const handleClose = (event) => {
+    if(event.target.classList.contains("bg-black/50")){
+      toggleModal()
+    }
+  }
   return (
-    <div className='bg-white w-[240px] h-[500px] ml-35 mt-[-5px] rounded-[10px] relative'>
+<div className='bg-black/50 w-full h-full fixed z-10' onClick={handleClose}>
+
+    <div className='bg-white w-[240px] h-[500px] z-10 right-[-10px] mt-[-5px] rounded-[10px] fixed '>
          <section className='flex flex-col'>
           
           {/* Botton de cerrar */}
-          <div className='w-[100%] h-[40px]  border-black flex justify-end'>
+          <div className='w-[100%] h-[40px]  border-black flex justify-end'onClick={toggleModal} >
             <button className=' border-black mr-5 mt-5 cursor-pointer'>
           <img src='/icons8-cerrar.png' className='h-[30px] w-[30px] '/>
           </button>
@@ -61,5 +69,6 @@ export default function Modal_Users() {
 
          </section>
     </div>
+</div>
   )
 }
