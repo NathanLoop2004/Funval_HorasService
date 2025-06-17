@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import DefaultButton from "../Components/Home/DefaultButton";
 import ServiceInfo from "../Components/Home/ServiceInfo";
@@ -180,6 +181,7 @@ export default function Home() {
           <button className="text-[#dadada] text-[20px] bg-[#0f47ad] px-3 py-2 my-[25px] rounded-lg hover:cursor-pointer hover:scale-105 ease-in-out duration-100">
             <a href="#">Volver al inicio</a>
           </button>
+
         </div>
       </div>
       {/* <ServiceInfo isOpen={isOpen} /> */}
@@ -187,3 +189,7 @@ export default function Home() {
     </div>
   );
 }
+//  <button className='bg-white ml-65 mt-5 px-5 py-2 rounded-[26px]'>
+//                 Usuarios
+            
+//             </button>

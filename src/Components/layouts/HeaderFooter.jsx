@@ -1,13 +1,22 @@
 import { Outlet } from "react-router-dom";
-
+import { useState } from "react";
+import Modal_Users from "../Home/Modal_Users";
 // Componente creado por Tomás
 
 export default function HeaderFooter() {
+
+   const [isModalOpen, setIsModalOpen] = useState(false)
+
+   const toggleModal = () => {
+    setIsModalOpen(!isModalOpen)
+   }
+
+
   return (
     <>
       <div className="bg-[#0f47ad] w-full h-[70px] fixed flex items-center justify-between z-10">
         <div className="bg-[url(/logo-funval.png)] bg-cover bg-center h-[50px] w-[150px] rounded-xl ml-[10px]"></div>
-        <button>
+        <button onClick={toggleModal}>
           <img
             className="w-[40px] mr-[10px] hover:cursor-pointer hover:scale-115 ease-in-out duration-100"
             src="/person-circle.svg"
@@ -15,6 +24,9 @@ export default function HeaderFooter() {
           />
         </button>
       </div>
+
+{isModalOpen && <Modal_Users toggleModal={toggleModal} />}
+
       <Outlet />
       <div className="bg-[#0f47ad] w-full h-[300px] mt-[18px] grid grid-cols-1 place-items-center grid-rows-[80px_80px_1fr]">
         <div className="flex flex-col items-center">
