@@ -17,3 +17,7 @@ export default function ServiceCard() {
     </div>
   );
 }
+
+/* Además del "/check-circle.svg", en la carpeta "public" hay
+otros svg que se pueden usar para indicar el estado del servicio.
+Dichos svg son: "question-circle.svg" y "x-circle.svg"*/
