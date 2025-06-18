@@ -3,6 +3,7 @@ import { useState } from "react";
 import DefaultButton from "../Components/Home/DefaultButton";
 import ServiceInfo from "../Components/Home/ServiceInfo";
 import HoursModal from "../Components/Home/HoursModal";
+import FormDarkMode from "./Formulario";
 
 /* Componente hecho por Tomás */
 
@@ -186,6 +187,7 @@ export default function Home() {
       </div>
       {/* <ServiceInfo isOpen={isOpen} /> */}
       <HoursModal isOpenHours={isOpenHours} closeModal={handleHoursModal} />
+      <FormDarkMode/>
     </div>
   );
 }
