@@ -33,10 +33,19 @@ export default function UserInfo({ isOpen, closeModal }) {
             alt="foto de usuario"
           />
           <button
-            className="bg-[#0f47ad] px-3 py-2 text-[#fff] text-[18px] rounded-lg hover:cursor-pointer hover:scale-105 ease-in-out duration-100"
+            className={`px-3 py-2 text-[#fff] text-[18px] rounded-lg hover:cursor-pointer hover:scale-105 ease-in-out duration-100 ${
+              enableEdit ? "bg-[#d81f1f]" : "bg-[#0f47ad]"
+            }`}
             onClick={handleEdit}
           >
-            Editar Datos
+            {enableEdit ? "Cancelar" : "Editar Datos"}
+          </button>
+          <button
+            className={`${
+              enableEdit ? "block" : "hidden"
+            } px-3 py-2 text-[#fff] text-[18px] rounded-lg hover:cursor-pointer hover:scale-105 ease-in-out duration-100 bg-[#0fad0f]`}
+          >
+            Guardar cambios
           </button>
         </div>
 
