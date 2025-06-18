@@ -6,9 +6,9 @@ import Forbidden from "./pages/Forbidden";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router";
 import HomeAdmin from "./pages/HomeAdmin";
+import ListUsers from "./pages/ListUsers";
 
 export default function App() {
-  
   return (
     <>
       <Routes>
@@ -16,6 +16,7 @@ export default function App() {
           <Route path="/" element={<HeaderFooter />}>
             <Route index element={<Home />} />
             <Route path="/admin" element={<HomeAdmin />} />
+            <Route path="/admin/users" element={<ListUsers />} />
           </Route>
         </Route>
         <Route path="/login" element={<Login />} />

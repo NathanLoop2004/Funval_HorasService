@@ -11,7 +11,7 @@ export default function ServiceCard() {
         <span className="hidden sm:block font-semibold">Aprobado</span>
         <img className="w-[25px]" src="/check-circle.svg" alt="rejected icon" />
         <button className="mr-2">
-          <img className="w-[25px]" src="/arrow.svg" alt="arrow icon" />
+          <img className="w-[25px]" src="/arrow-white.svg" alt="arrow icon" />
         </button>
       </div>
     </div>
