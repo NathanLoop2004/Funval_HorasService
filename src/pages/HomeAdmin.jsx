@@ -10,6 +10,10 @@ export default function HomeAdmin() {
     navigate("/admin/users");
   };
 
+  const handleNavigateReview = () => {
+    navigate("/admin/review");
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className="w-full h-[70px] bg-[#fff]">
@@ -22,6 +26,7 @@ export default function HomeAdmin() {
           image={"/admin-service-bg.webp"}
         />
         <DefaultButton
+          action={handleNavigateReview}
           text={"Revisar horas de servicio"}
           image={"/homepage_service_bg2.webp"}
         />
