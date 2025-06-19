@@ -11,6 +11,7 @@ export async function formulario(form) {
 }
 
 
+
 export async function HomeData() {
     try {
         const { data } = await instanceForm.get('/auth/profile')
