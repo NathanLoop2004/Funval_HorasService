@@ -9,3 +9,14 @@ export async function formulario(form) {
         throw error
     }
 }
+
+
+export async function HomeData() {
+    try {
+        const { data } = await instanceForm.get('/auth/profile')
+        console.log(data)
+        return data
+    } catch (error) {
+        throw error
+    }
+}

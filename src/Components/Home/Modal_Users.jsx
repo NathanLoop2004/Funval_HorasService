@@ -1,7 +1,14 @@
 import React from 'react'
+import { HomeData } from '../../axios/Formulario'
 
-export default function Modal_Users({toggleModal}) {
+
+export default function Modal_Users({toggleModal, datos}) {
   
+ 
+
+   
+
+
 
   const handleClose = (event) => {
     if(event.target.classList.contains("bg-black/50")){
@@ -34,23 +41,29 @@ export default function Modal_Users({toggleModal}) {
 
 
              {/* Nombre del usuario */}
+             {
+             datos.f_name && datos.f_lastname &&(
+             
            <div className='flex flex-row  border-black relative'>
-             <h1 className='text-[22px] text-[#4e4e4ee0] font-semibold ml-5 mt-3  border-white '>NathanLoop2004</h1>
+             <h1 className='text-[15px] text-[#4e4e4ee0] font-semibold ml-5 mt-3  border-white '>{`${datos.f_name} ${datos.f_lastname}`}</h1>
             <img className='w-[20px] h-[25px] shadow-none border-white mt-4 right-4 absolute' src='/FunvalFlechita.webp'></img>
            </div>
-
+             )}
 
            {/* gmail del usuario */}
+           { datos.email && (
            <div className='flex flex-row  w-[100%] h-[20px] border-black relative'>
-            <h1 className='text-[16px] text-[#2c2c2ce0] ml-5 font-semibold border-white' >Jinderloop@gmail.com</h1>
+            <h1 className='text-[14px] text-[#2c2c2ce0] ml-5 font-semibold border-white' >{datos.email}</h1>
             <img className=' w-[20px] h-[20px] absolute right-4 mt-1' src='/logo_gmail.png'/>
            </div>
-
+)}
               {/* numero de telefono del usuario */}
-           <div className='flex flex-row  w-[100%] h-[20px] mt-2 border-black  relative'>
-              <h1 className='text-[13px] text-[#bd9100e0] ml-5 font-semibold border-white'>+595 981 048195</h1>
-              <img src='/whatsapp.png' className='w-[20px] h-[20px] absolute right-4'/>
-           </div>
+           {datos.phone && (
+  <div className='flex flex-row w-[100%] h-[20px] mt-2 border-black relative'>
+    <h1 className='text-[13px] text-[#bd9100e0] ml-5 font-semibold border-white'>{datos.phone}</h1>
+    <img src='/whatsapp.png' className='w-[20px] h-[20px] absolute right-4'/>
+  </div>
+)}
 
 
           {/* Button Changes Datos */}
