@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import { Route, Routes } from "react-router";
 import HomeAdmin from "./pages/HomeAdmin";
 import ListUsers from "./pages/ListUsers";
+import ServiceHoursReportForm from "./pages/Formulario";
+
 
 export default function App() {
   return (
@@ -15,6 +17,7 @@ export default function App() {
         <Route element={<AuthLayout />}>
           <Route path="/" element={<HeaderFooter />}>
             <Route index element={<Home />} />
+            <Route path="/form" element={<ServiceHoursReportForm/>}/>
             <Route path="/admin" element={<HomeAdmin />} />
             <Route path="/admin/users" element={<ListUsers />} />
           </Route>
