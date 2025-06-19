@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { login } from '../axios/auth';
 import { useNavigate } from 'react-router';
+import { useClearCookiesOnLoad } from '../axios/borrarCookie/ClearCookie';
 
 export default function Login() {
     const navigate = useNavigate();
-
+    useClearCookiesOnLoad();
     const [error, setError] = useState(false)
 
     async function handleLogin(e) {
