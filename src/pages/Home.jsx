@@ -3,21 +3,24 @@ import { useState } from "react";
 import DefaultButton from "../Components/Home/DefaultButton";
 import ServiceInfo from "../Components/Home/ServiceInfo";
 import HoursModal from "../Components/Home/HoursModal";
-import FormDarkMode from "./Formulario";
+import { useNavigate } from "react-router";
 
 /* Componente hecho por Tomás */
 
 export default function Home() {
   const [isOpenHours, setIsOpenHours] = useState(false);
+  const navigate = useNavigate();
 
-  const handleClick = () => {
-    console.log("click!");
-  };
+
 
   const handleHoursModal = () => {
     setIsOpenHours((prev) => {
       return !prev;
     });
+  };
+
+  const handleNavigateForm = () => {
+    navigate("/form");
   };
 
   return (
@@ -27,7 +30,8 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-1 justify-items-center w-full max-w-[320px] sm:grid-cols-2 sm:max-w-[640px]">
         <DefaultButton
-          action={handleClick}
+          action={handleNavigateForm}
+        
           text={"Reportar horas de servicio"}
           image={"/homepage_service_bg.webp"}
         />
@@ -187,7 +191,7 @@ export default function Home() {
       </div>
       {/* <ServiceInfo isOpen={isOpen} /> */}
       <HoursModal isOpenHours={isOpenHours} closeModal={handleHoursModal} />
-      <FormDarkMode/>
+     
     </div>
   );
 }

@@ -1,9 +1,9 @@
-import { instance } from "./users/instance"
+import { instanceForm } from "./Form/instanceForm"
 
 
 export async function formulario(form) {
     try {
-        const { data } = await instance.post('/services', form)
+        const { data } = await instanceForm.post('/services', form)
         return data
     } catch (error) {
         throw error
