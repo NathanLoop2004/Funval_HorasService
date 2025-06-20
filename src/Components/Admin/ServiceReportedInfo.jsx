@@ -7,6 +7,7 @@ import UserServiceInfo from "./UserServiceInfo";
 export default function ServiceReportedInfo({ isOpen, handleClose, userId }) {
   const [isOpenInfo, setIsOpenInfo] = useState(false);
   const [serviceInfo, setServiceInfo] = useState([]);
+  const [selectedService, setSelectedService] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -20,7 +21,11 @@ export default function ServiceReportedInfo({ isOpen, handleClose, userId }) {
     fetchData();
   }, [userId]);
 
-  const handleClick = () => {
+  const handleClick = (service) => {
+    if (isOpen) {
+      setSelectedService(service);
+    }
+
     setIsOpenInfo((prev) => {
       return !prev;
     });
@@ -47,7 +52,7 @@ export default function ServiceReportedInfo({ isOpen, handleClose, userId }) {
                 return (
                   <ServiceCard
                     servicio={service}
-                    action={handleClick}
+                    action={() => handleClick(service)}
                     key={service?.id}
                   />
                 );
@@ -60,7 +65,11 @@ export default function ServiceReportedInfo({ isOpen, handleClose, userId }) {
           </div>
         </div>
       </div>
-      <UserServiceInfo isOpen={isOpenInfo} handleClose={handleClick} />
+      <UserServiceInfo
+        isOpen={isOpenInfo}
+        handleClose={handleClick}
+        service={selectedService}
+      />
     </div>
   );
 }

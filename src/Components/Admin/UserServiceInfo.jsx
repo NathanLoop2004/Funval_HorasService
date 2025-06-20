@@ -1,7 +1,7 @@
 /* Componente creado por Tomás */
 import DefaultButton from "../Home/DefaultButton";
 
-export default function UserServiceInfo({ isOpen, handleClose }) {
+export default function UserServiceInfo({ isOpen, handleClose, service }) {
   return (
     <div
       className={`${
@@ -25,9 +25,11 @@ export default function UserServiceInfo({ isOpen, handleClose }) {
             />
           </div>
           <button
-            className={`px-3 py-2 text-[#fff] text-[18px] rounded-lg hover:cursor-pointer hover:scale-105 ease-in-out duration-100 bg-[#0f47ad]`}
+            className={`${
+              service?.status === "Pending" ? "block" : "hidden"
+            } px-3 py-2 text-[#fff] text-[18px] rounded-lg hover:cursor-pointer hover:scale-105 ease-in-out duration-100 bg-[#d81f1f]`}
           >
-            Cancelar
+            Rechazar
           </button>
         </div>
 
@@ -36,35 +38,35 @@ export default function UserServiceInfo({ isOpen, handleClose }) {
             <h3 className="font-semibold text-[20px] text-[#0f47ad]">
               Nombre del Estudiante
             </h3>
-            <span className="font-semibold">Monkey D. Luffy</span>
+            <span className="font-semibold">{service?.user?.full_name}</span>
           </div>
           <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
             <h3 className="font-semibold text-[20px] text-[#0f47ad]">
               ID usuario
             </h3>
-            <span className="font-semibold">3</span>
+            <span className="font-semibold">{service?.user?.id}</span>
           </div>
           <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
             <h3 className="font-semibold text-[20px] text-[#0f47ad]">
               ID reporte
             </h3>
-            <span className="font-semibold">5</span>
+            <span className="font-semibold">{service?.id}</span>
           </div>
           <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
             <h3 className="font-semibold text-[20px] text-[#0f47ad]">
               Tipo de Servicio
             </h3>
-            <span className="font-semibold">Templo e Historia Familiar</span>
+            <span className="font-semibold">{service?.category?.name}</span>
           </div>
           <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
             <h3 className="font-semibold text-[20px] text-[#0f47ad]">Status</h3>
-            <span className="font-semibold">Pendiente</span>
+            <span className="font-semibold">{service?.status}</span>
           </div>
           <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
             <h3 className="font-semibold text-[20px] text-[#0f47ad]">
               Horas Reportadas
             </h3>
-            <span className="font-semibold">6</span>
+            <span className="font-semibold">{service?.amount_reported}</span>
           </div>
         </div>
       </div>
