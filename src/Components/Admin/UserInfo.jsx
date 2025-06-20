@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { DatosDeUsuarioID } from "../../axios/Formulario";
 
-export default function UserInfo({ isOpen, closeModal }) {
+export default function UserInfo({ isOpen, closeModal, userId }) {
   const [enableEdit, setenableEdit] = useState(false);
 
+    console.log("userId recibido:", userId);
   const handleEdit = () => {
     setenableEdit((prev) => {
       return !prev;
@@ -12,6 +14,34 @@ export default function UserInfo({ isOpen, closeModal }) {
   const handleClose = () => {
     closeModal();
   };
+
+
+ 
+
+const [infoUsuarios, setInfoUsuarios] = useState([]);
+        
+       
+useEffect(() => {
+  async function fetchData() {
+    try {
+      if (userId) {
+  const data = await DatosDeUsuarioID(userId);
+  console.log("Datos recibidos:", data);
+  setInfoUsuarios(data);
+}
+    } catch (error) {
+      console.log("Error al obtener datos:", error);
+    }
+  }
+  fetchData();
+}, [userId]);
+
+
+
+
+
+
+
 
   return (
     <div
@@ -56,7 +86,7 @@ export default function UserInfo({ isOpen, closeModal }) {
             </h3>
             <input
               className="font-semibold"
-              defaultValue={"Monkey D. Luffy"}
+              defaultValue={infoUsuarios.full_name}
               readOnly={!enableEdit}
             />
           </div>
@@ -68,7 +98,7 @@ export default function UserInfo({ isOpen, closeModal }) {
               type="number"
               min={1}
               className="font-semibold"
-              defaultValue={3}
+              defaultValue={infoUsuarios.id}
               readOnly={!enableEdit}
             />
           </div>
@@ -77,7 +107,7 @@ export default function UserInfo({ isOpen, closeModal }) {
             <input
               className="font-semibold"
               type="email"
-              defaultValue={"email@mail.com"}
+              defaultValue={infoUsuarios.email}
               readOnly={!enableEdit}
             />
           </div>
@@ -88,7 +118,7 @@ export default function UserInfo({ isOpen, closeModal }) {
             <input
               type="tel"
               className="font-semibold"
-              defaultValue={"+12 3456 789"}
+              defaultValue={infoUsuarios.phone}
               readOnly={!enableEdit}
             />
           </div>
@@ -96,13 +126,13 @@ export default function UserInfo({ isOpen, closeModal }) {
             <h3 className="font-semibold text-[20px] text-[#0f47ad]">Status</h3>
             <select
               className="font-semibold"
-              defaultValue={"Activo"}
+              defaultValue={infoUsuarios.status}
               id="select-status"
               name="status"
               disabled={!enableEdit}
             >
-              <option defaultValue="Activo">Activo</option>
-              <option defaultValue="Inactivo">Inactivo</option>
+              <option defaultValue="activo">Activo</option>
+              <option defaultValue="inactivo">Inactivo</option>
             </select>
           </div>
           <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">

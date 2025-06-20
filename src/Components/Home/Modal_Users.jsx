@@ -1,6 +1,6 @@
 import React from 'react'
 import { HomeData } from '../../axios/Formulario'
-
+import MiComponente from '../../axios/borrarCookie/ClearCookie'
 
 export default function Modal_Users({toggleModal, datos}) {
   
@@ -76,7 +76,9 @@ export default function Modal_Users({toggleModal, datos}) {
             
 
 
-
+         
+          <MiComponente/>
+         
 
 
 
