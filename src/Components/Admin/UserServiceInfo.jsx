@@ -1,10 +1,16 @@
 /* Componente creado por Tomás */
 import { useState } from "react";
 import DefaultButton from "../Home/DefaultButton";
+import { RevisarServicio } from "../../axios/Formulario";
 
 export default function UserServiceInfo({ isOpen, handleClose, service }) {
   const [hoursApproved, setHoursApproved] = useState(0);
   const [enableApprove, setEnableApprove] = useState(false);
+  const [form, setForm] = useState({
+    approved_hours: "",
+    comment: "",
+    status: "",
+  });
 
   const handleChange = (e) => {
     setHoursApproved(parseInt(e.target.value));
@@ -15,13 +21,28 @@ export default function UserServiceInfo({ isOpen, handleClose, service }) {
     setHoursApproved(0);
   };
 
+  const handleSubmit = async (status_id, e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("amount_approved", String(form.approved_hours));
+    formData.append("comment", String(form.comment));
+    formData.append("status", String(form.status));
+
+    try {
+      const data = await RevisarServicio(21, formData);
+      console.log("Datos actualizados", data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div
       className={`${
         isOpen ? "fixed" : "hidden"
       } bg-[#0f46ad79] w-full h-screen flex justify-center items-center z-20`}
     >
-      <div className="bg-[#fff] w-[90%] h-[90%] rounded-xl flex flex-col overflow-y-scroll custom-scroll">
+      <form className="bg-[#fff] w-[90%] h-[90%] rounded-xl flex flex-col overflow-y-scroll custom-scroll">
         <button
           onClick={handleClose}
           className="self-end fixed mr-[15px] bg-[#d81f1f] hover:cursor-pointer hover:bg-[#d81f1f] ease-in-out duration-200 rounded-full mt-[5px] sm:bg-[#fff]"
@@ -99,6 +120,7 @@ export default function UserServiceInfo({ isOpen, handleClose, service }) {
                 Horas Aprobadas
               </h3>
               <input
+                name="approved_hours"
                 onChange={handleChange}
                 className="w-[90%]"
                 placeholder="Cantidad de horas aprobadas"
@@ -122,6 +144,7 @@ export default function UserServiceInfo({ isOpen, handleClose, service }) {
             </h3>
             {service?.status === "Pending" ? (
               <textarea
+                name="comment"
                 className="w-[90%] min-h-[100px]"
                 placeholder="Enviar comentario"
               />
@@ -132,7 +155,7 @@ export default function UserServiceInfo({ isOpen, handleClose, service }) {
             )}
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
