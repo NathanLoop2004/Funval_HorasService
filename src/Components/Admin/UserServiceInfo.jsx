@@ -1,10 +1,16 @@
 /* Componente creado por Tomás */
 import { useState } from "react";
 import DefaultButton from "../Home/DefaultButton";
+import { RevisarServicio } from "../../axios/Formulario";
 
 export default function UserServiceInfo({ isOpen, handleClose, service }) {
   const [hoursApproved, setHoursApproved] = useState(0);
   const [enableApprove, setEnableApprove] = useState(false);
+  const [form, setForm] = useState({
+    approved_hours: "",
+    comment: "",
+    status: "",
+  });
 
   const handleChange = (e) => {
     setHoursApproved(parseInt(e.target.value));
@@ -13,6 +19,21 @@ export default function UserServiceInfo({ isOpen, handleClose, service }) {
 
   const handleReject = () => {
     setHoursApproved(0);
+  };
+
+  const handleSubmit = async (status_id, e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("amount_approved", String(form.approved_hours));
+    formData.append("comment", String(form.comment));
+    formData.append("status", String(form.status));
+
+    try {
+      const data = await RevisarServicio(21, formData);
+      console.log("Datos actualizados", data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
