@@ -28,7 +28,11 @@ export default function ServiceReportedCard({ action, usuarios }) {
   {usuarios.status}
           
         </span>
+ <div className="bg-blue-600  h-[20px] w-[50%] rounded-[10px] md:flex items-center  justify-center mt-1 hidden">
+  <h1 className="text-white text-[15px]">{usuarios.role?.name}</h1>
+  </div>       
       </div>
+      
       <img
         className="w-[25px] hidden sm:block justify-self-end self-center mr-2"
         src="/arrow-blue.svg"
