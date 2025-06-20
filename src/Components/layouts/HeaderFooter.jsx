@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal_Users from "../Home/Modal_Users";
+import { HomeData } from "../../axios/Formulario";
 // Componente creado por Tomás
 
 export default function HeaderFooter() {
@@ -10,6 +11,22 @@ export default function HeaderFooter() {
    const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
    }
+  
+  const [datos, setDatos] = useState([]);
+   
+  
+    useEffect(() => {
+      async function fetchData() {
+        try {
+          const data = await HomeData();
+          setDatos(data);
+        } catch (error) {
+          console.log("Error al obtener datos:", error);
+        }
+      }
+      fetchData();
+    }, []);
+
 
 
   return (
@@ -25,7 +42,7 @@ export default function HeaderFooter() {
         </button>
       </div>
 
-{isModalOpen && <Modal_Users toggleModal={toggleModal} />}
+{isModalOpen && <Modal_Users toggleModal={toggleModal} datos ={datos}/>}
 
       <Outlet />
       <div className="bg-[#0f47ad] w-full h-[300px] mt-[18px] grid grid-cols-1 place-items-center grid-rows-[80px_80px_1fr]">

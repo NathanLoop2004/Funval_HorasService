@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router"
 import { profile } from "../../axios/auth"
 import { logout } from "../../axios/auth"
+import { HomeData } from '../../axios/Formulario'
+import MiComponente from '../../axios/borrarCookie/ClearCookie'
 
-export default function Modal_Users({ toggleModal }) {
+export default function Modal_Users({ toggleModal, datos }) {
 
   const { register } = useForm({ defaultValues: async () => await profile() })
   const [save, setSave] = useState(false)
@@ -68,14 +70,42 @@ export default function Modal_Users({ toggleModal }) {
 
 
           {/* Nombre del usuario */}
-          <div className='flex flex-row  border-black relative'>
-            <input type="text"
-              className="text-[19px] text-[#4e4e4ee0] font-semibold ml-5 mt-3  border-white"
-              {...register("full_name")}
-              readOnly />
-            {/* <h1 className='text-[22px] text-[#4e4e4ee0] font-semibold ml-5 mt-3  border-white '>NathanLoop2004</h1> */}
-            <img className='w-[20px] h-[25px] shadow-none border-white mt-4 right-4 absolute' src='/FunvalFlechita.webp'></img>
+          {
+            datos.f_name && datos.f_lastname && (
+
+              <div className='flex flex-row  border-black relative'>
+                <h1 className='text-[15px] text-[#4e4e4ee0] font-semibold ml-5 mt-3  border-white '>{`${datos.f_name} ${datos.f_lastname}`}</h1>
+                <img className='w-[20px] h-[25px] shadow-none border-white mt-4 right-4 absolute' src='/FunvalFlechita.webp'></img>
+              </div>
+            )}
+
+          {/* gmail del usuario */}
+          {datos.email && (
+            <div className='flex flex-row  w-[100%] h-[20px] border-black relative'>
+              <h1 className='text-[14px] text-[#2c2c2ce0] ml-5 font-semibold border-white' >{datos.email}</h1>
+              <img className=' w-[20px] h-[20px] absolute right-4 mt-1' src='/logo_gmail.png' />
+            </div>
+          )}
+          {/* numero de telefono del usuario */}
+          {datos.phone && (
+            <div className='flex flex-row w-[100%] h-[20px] mt-2 border-black relative'>
+              <h1 className='text-[13px] text-[#bd9100e0] ml-5 font-semibold border-white'>{datos.phone}</h1>
+              <img src='/whatsapp.png' className='w-[20px] h-[20px] absolute right-4' />
+            </div>
+          )}
+
+
+          {/* Button Changes Datos */}
+          <div className='w-[100%] border-black h-[40px] mt-15'>
+            <button className="flex flex-row w-[120px] h-[45px] cursor-pointer bg-[#317ae2]    hover:bg-[#013c8f] rounded-[11px] items-center p-3 gap-1  ml-15">
+              <h1 className='text-[8px] text-white font-bold ml-2'>CAMBIAR DATOS</h1>
+              <img src="/icons8-actualizar-30.png" alt="" className='w-[20px] h-[20px]' />
+            </button>
           </div>
+
+
+
+          <MiComponente />
 
 
           {/* gmail del usuario */}
@@ -118,8 +148,8 @@ export default function Modal_Users({ toggleModal }) {
             </button>
           </div>
 
-        </section>
-      </div>
-    </div>
+        </section >
+      </div >
+    </div >
   )
 }

@@ -1,5 +1,7 @@
 import ServiceCard from "./ServiceCard";
-
+import { useState, useEffect  } from "react";
+import { ServiciosHechos } from "../../axios/Formulario"
+import { useNavigate } from "react-router-dom";;
 // Componente creado por Tomás
 
 export default function HoursModal({ isOpenHours, closeModal }) {
@@ -7,13 +9,39 @@ export default function HoursModal({ isOpenHours, closeModal }) {
     closeModal();
   };
 
+ const navigate = useNavigate();
+
+   const handleNavigateHome = () => {
+    navigate("/form");
+  };
+
+
+ const [infoService, setInfoService] = useState([]);
+    
+   
+     useEffect(() => {
+       async function fetchData() {
+         try {
+           const data = await ServiciosHechos();
+           setInfoService(data);
+         } catch (error) {
+           console.log("Error al obtener datos:", error);
+         }
+       }
+       fetchData();
+     }, []);
+
+
+
+
+
   return (
     <div
       className={`bg-[#0f46ad79] ${
         isOpenHours ? "fixed" : "hidden"
       } w-full h-screen flex justify-center items-center z-20`}
     >
-      <div className="bg-[#fff] w-[90%] h-[90%] rounded-xl flex flex-col items-center">
+      <div className="bg-[#fff] w-[90%] h-[95%] rounded-xl flex flex-col items-center">
         <button
           onClick={handleClose}
           className="self-end mr-[15px] hover:cursor-pointer hover:bg-[#d81f1f] ease-in-out duration-200 rounded-full mt-[5px]"
@@ -24,18 +52,10 @@ export default function HoursModal({ isOpenHours, closeModal }) {
           Horas de servicio reportadas
         </p>
         <div className="bg-[#ebebeb] h-[65%] w-[90%] max-w-[850px] grid grid-cols-1 justify-items-center overflow-y-scroll custom-scroll pb-2">
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
-          <ServiceCard />
+         {infoService.map(servicio => <ServiceCard servicio={servicio} />)}
+          
         </div>
-        <button className="text-[30px] font-semibold text-[#fff] px-[13px] bg-[#0f47ad] flex items-center justify-center rounded-xl mt-[10px] hover:cursor-pointer hover:scale-110 ease-in-out duration-100">
+        <button className="text-[30px] font-semibold text-[#fff] px-[13px] bg-[#0f47ad] flex items-center justify-center rounded-xl mt-[5px] hover:cursor-pointer hover:scale-110 ease-in-out duration-100" onClick={handleNavigateHome}>
           +
         </button>
       </div>

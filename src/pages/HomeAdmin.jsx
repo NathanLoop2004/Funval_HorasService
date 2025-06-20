@@ -1,8 +1,19 @@
+import { useNavigate } from "react-router";
 import DefaultButton from "../Components/Home/DefaultButton";
 
 /* Componente creado por Tomás */
 
 export default function HomeAdmin() {
+  const navigate = useNavigate();
+
+  const handleNavigateUsers = () => {
+    navigate("/admin/users");
+  };
+
+  const handleNavigateReview = () => {
+    navigate("/admin/review");
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className="w-full h-[70px] bg-[#fff]">
@@ -10,10 +21,12 @@ export default function HomeAdmin() {
       </div>
       <div className="grid grid-cols-1 justify-items-center w-full max-w-[320px] sm:grid-cols-2 sm:max-w-[640px]">
         <DefaultButton
+          action={handleNavigateUsers}
           text={"Listar usuarios"}
           image={"/admin-service-bg.webp"}
         />
         <DefaultButton
+          action={handleNavigateReview}
           text={"Revisar horas de servicio"}
           image={"/homepage_service_bg2.webp"}
         />
