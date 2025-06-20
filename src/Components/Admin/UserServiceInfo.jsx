@@ -21,7 +21,7 @@ export default function UserServiceInfo({ isOpen, handleClose, service }) {
         isOpen ? "fixed" : "hidden"
       } bg-[#0f46ad79] w-full h-screen flex justify-center items-center z-20`}
     >
-      <div className="bg-[#fff] w-[90%] h-[90%] rounded-xl flex flex-col overflow-y-scroll custom-scroll">
+      <form className="bg-[#fff] w-[90%] h-[90%] rounded-xl flex flex-col overflow-y-scroll custom-scroll">
         <button
           onClick={handleClose}
           className="self-end fixed mr-[15px] bg-[#d81f1f] hover:cursor-pointer hover:bg-[#d81f1f] ease-in-out duration-200 rounded-full mt-[5px] sm:bg-[#fff]"
@@ -99,6 +99,7 @@ export default function UserServiceInfo({ isOpen, handleClose, service }) {
                 Horas Aprobadas
               </h3>
               <input
+                name="approved_hours"
                 onChange={handleChange}
                 className="w-[90%]"
                 placeholder="Cantidad de horas aprobadas"
@@ -122,6 +123,7 @@ export default function UserServiceInfo({ isOpen, handleClose, service }) {
             </h3>
             {service?.status === "Pending" ? (
               <textarea
+                name="comment"
                 className="w-[90%] min-h-[100px]"
                 placeholder="Enviar comentario"
               />
@@ -132,7 +134,7 @@ export default function UserServiceInfo({ isOpen, handleClose, service }) {
             )}
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

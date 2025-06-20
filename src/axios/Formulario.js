@@ -38,26 +38,33 @@ export async function ServiciosHechosID(user_id) {
   }
 }
 
-export async function TraerUsuarios() {
-
-    try {
-        const { data } = await instanceForm.get('/users?r=1')
-        console.log(data)
-        return data
-    } catch (error) {
-         console.log(error.response?.data);
-        throw error
-    }
+export async function RevisarServicio(service_id, form) {
+  try {
+    const { data } = await instanceForm.patch(`/review/${service_id}/`, form);
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
+export async function TraerUsuarios() {
+  try {
+    const { data } = await instanceForm.get("/users?r=1");
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error.response?.data);
+    throw error;
+  }
+}
 
 export async function DatosDeUsuarioID(userId) {
-    try {
-        const { data } = await instanceForm.get(`/users/${userId}`);
-        console.log(data);
-        return data;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const { data } = await instanceForm.get(`/users/${userId}`);
+    console.log(data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
 }
-
