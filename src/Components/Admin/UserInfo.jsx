@@ -86,7 +86,7 @@ useEffect(() => {
             </h3>
             <input
               className="font-semibold"
-              defaultValue={"Monkey D. Luffy"}
+              defaultValue={infoUsuarios.full_name}
               readOnly={!enableEdit}
             />
           </div>
@@ -98,7 +98,7 @@ useEffect(() => {
               type="number"
               min={1}
               className="font-semibold"
-              defaultValue={3}
+              defaultValue={infoUsuarios.id}
               readOnly={!enableEdit}
             />
           </div>
@@ -107,7 +107,7 @@ useEffect(() => {
             <input
               className="font-semibold"
               type="email"
-              defaultValue={"email@mail.com"}
+              defaultValue={infoUsuarios.email}
               readOnly={!enableEdit}
             />
           </div>
@@ -118,7 +118,7 @@ useEffect(() => {
             <input
               type="tel"
               className="font-semibold"
-              defaultValue={"+12 3456 789"}
+              defaultValue={infoUsuarios.phone}
               readOnly={!enableEdit}
             />
           </div>
@@ -126,13 +126,13 @@ useEffect(() => {
             <h3 className="font-semibold text-[20px] text-[#0f47ad]">Status</h3>
             <select
               className="font-semibold"
-              defaultValue={"Activo"}
+              defaultValue={infoUsuarios.status}
               id="select-status"
               name="status"
               disabled={!enableEdit}
             >
-              <option defaultValue="Activo">Activo</option>
-              <option defaultValue="Inactivo">Inactivo</option>
+              <option defaultValue="activo">Activo</option>
+              <option defaultValue="inactivo">Inactivo</option>
             </select>
           </div>
           <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
