@@ -4,8 +4,10 @@ import ServiceReportedCard from "../Components/Admin/ServiceReportedCard";
 import { useState, useEffect } from "react";
 import ServiceReportedInfo from "../Components/Admin/ServiceReportedInfo";
 import { TraerUsuarios } from "../axios/Formulario";
+import { useNavigate } from "react-router";
 
 export default function ReviewServices() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
 
@@ -17,6 +19,10 @@ export default function ReviewServices() {
     setIsOpen((prev) => {
       return !prev;
     });
+  };
+
+ const handleNavigateHomeAdmin = () => {
+    navigate("/admin");
   };
 
   const [infoUsuarios, setInfoUsuarios] = useState([]);
@@ -87,6 +93,9 @@ export default function ReviewServices() {
         handleClose={handleClick}
         userId={selectedUserId}
       />
+      <button className="w-[50%] py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition duration-200 mt-10 mb-10" onClick={handleNavigateHomeAdmin}>
+        Voler al Inicio
+      </button>
     </div>
   );
 }
