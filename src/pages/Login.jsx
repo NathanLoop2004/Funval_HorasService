@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { login } from '../axios/auth';
+import { login, profile } from '../axios/auth';
 import { useNavigate } from 'react-router';
 
 
@@ -18,14 +18,23 @@ export default function Login() {
             console.log(data)
 
             if (data.status === 'success') {
-                navigate('/');
-            } else {
-                setError(true)
-            }
-        } catch (error) {
+                const userProfile = await profile();
 
-            console.log(error)
-            setError(true)
+                const role = userProfile?.role?.name;
+
+                if (role === "Admin") {
+                    navigate("/admin");
+                } else if (role === "Student") {
+                    navigate("/home");
+                } else {
+                    navigate("/forbidden"); // O página por defecto
+                }
+            } else {
+                alert("Credenciales incorrectas");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Error al iniciar sesión");
         }
     }
 

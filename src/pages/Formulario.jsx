@@ -1,21 +1,21 @@
 // ServiceHoursReportForm.jsx
-import  { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
 import { formulario } from "../axios/Formulario";
 
 
 export default function ServiceHoursReportForm() {
-  
+
   const navigate = useNavigate();
 
-   const handleNavigateHome = () => {
+  const handleNavigateHome = () => {
     navigate("/");
   };
-  
-  
-  
-  
+
+
+
+
   const [form, setForm] = useState({
     actividad: "",
     descripcion: "",
@@ -42,15 +42,15 @@ export default function ServiceHoursReportForm() {
     formData.append("description", String(form.descripcion));
     formData.append("amount_reported", String(form.horas));
     formData.append("evidence", form.archivo);
-   
-try {
-  const data = await formulario(formData)
-                    console.log(data)
-} catch (error) {
-  console.log(error)
-}
 
-          
+    try {
+      const data = await formulario(formData)
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+
+
   };
 
   return (
@@ -140,7 +140,7 @@ try {
         </button>
       </form>
       <button className="w-[50%] py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition duration-200 mt-10 mb-10" onClick={handleNavigateHome}>
-        Voler al Inicio
+        Volver al Inicio
       </button>
     </div>
   );
