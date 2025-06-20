@@ -6,36 +6,33 @@ import ServiceReportedInfo from "../Components/Admin/ServiceReportedInfo";
 import { TraerUsuarios } from "../axios/Formulario";
 
 export default function ReviewServices() {
-
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
 
-const handleClick = (id) => {
-  setSelectedUserId(selectedUserId);
-  
-  // Aquí puedes hacer lo que quieras con el id
-  console.log("ID del usuario clickeado:", id);
-};
+  const handleClick = (id) => {
+    if (!isOpen) {
+      setSelectedUserId(id);
+    }
+
+    setIsOpen((prev) => {
+      return !prev;
+    });
+  };
 
   const [infoUsuarios, setInfoUsuarios] = useState([]);
-        
-       
-         useEffect(() => {
-           async function fetchData() {
-             try {
-               const data = await TraerUsuarios();
-            
-               setInfoUsuarios(data);
-             } catch (error) {
-               console.log("Error al obtener datos:", error);
-             }
-           }
-           fetchData();
-         }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await TraerUsuarios();
 
-
-
-
+        setInfoUsuarios(data);
+      } catch (error) {
+        console.log("Error al obtener datos:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="grid grid-cols-1 justify-items-center">
@@ -77,15 +74,19 @@ const handleClick = (id) => {
         </select>
       </div>
       <div className="w-[90%] bg-[#ebebeb] min-h-[180px] rounded-lg grid grid-cols-1 justify-items-center max-w-[650px] pb-3">
-         {infoUsuarios.map(usuarios => (
-  <ServiceReportedCard
-    key={usuarios.id}
-    action={() => handleClick(usuarios.id)}
-    usuarios={usuarios}
-  />
-))}
+        {infoUsuarios.map((usuarios) => (
+          <ServiceReportedCard
+            key={usuarios.id}
+            action={() => handleClick(usuarios.id)}
+            usuarios={usuarios}
+          />
+        ))}
       </div>
-      
+      <ServiceReportedInfo
+        isOpen={isOpen}
+        handleClose={handleClick}
+        userId={selectedUserId}
+      />
     </div>
   );
 }

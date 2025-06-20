@@ -1,7 +1,31 @@
 /* Componente creado por Tomás */
-import DefaultButton from "../Home/DefaultButton";
+import { useEffect, useState } from "react";
+import { ServiciosHechosID } from "../../axios/Formulario";
+import ServiceCard from "../Home/ServiceCard";
+import UserServiceInfo from "./UserServiceInfo";
 
-export default function ServiceReportedInfo({ isOpen, handleClose }) {
+export default function ServiceReportedInfo({ isOpen, handleClose, userId }) {
+  const [isOpenInfo, setIsOpenInfo] = useState(false);
+  const [serviceInfo, setServiceInfo] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await ServiciosHechosID(userId?.toString());
+        setServiceInfo(data);
+      } catch (error) {
+        console.log("Error al obtener datos:", error);
+      }
+    }
+    fetchData();
+  }, [userId]);
+
+  const handleClick = () => {
+    setIsOpenInfo((prev) => {
+      return !prev;
+    });
+  };
+
   return (
     <div
       className={`${
@@ -16,58 +40,27 @@ export default function ServiceReportedInfo({ isOpen, handleClose }) {
           <img className="w-[40px]" src="/cross.svg" alt="close icon" />
         </button>
 
-        <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-end">
-          <div className="w-[250px] ml-5">
-            <DefaultButton
-              text={"Evidencia"}
-              image={"/drive-logo.webp"}
-              textColor={"#333"}
-            />
-          </div>
-          <button
-            className={`px-3 py-2 text-[#fff] text-[18px] rounded-lg hover:cursor-pointer hover:scale-105 ease-in-out duration-100 bg-[#0f47ad]`}
-          >
-            Cancelar
-          </button>
-        </div>
-
-        <div className="my-5 grid grid-cols-1 ml-5 sm:grid-cols-2 gap-y-3 gap-x-3">
-          <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
-            <h3 className="font-semibold text-[20px] text-[#0f47ad]">
-              Nombre del Estudiante
-            </h3>
-            <span className="font-semibold">Monkey D. Luffy</span>
-          </div>
-          <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
-            <h3 className="font-semibold text-[20px] text-[#0f47ad]">
-              ID usuario
-            </h3>
-            <span className="font-semibold">3</span>
-          </div>
-          <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
-            <h3 className="font-semibold text-[20px] text-[#0f47ad]">
-              ID reporte
-            </h3>
-            <span className="font-semibold">5</span>
-          </div>
-          <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
-            <h3 className="font-semibold text-[20px] text-[#0f47ad]">
-              Tipo de Servicio
-            </h3>
-            <span className="font-semibold">Templo e Historia Familiar</span>
-          </div>
-          <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
-            <h3 className="font-semibold text-[20px] text-[#0f47ad]">Status</h3>
-            <span className="font-semibold">Pendiente</span>
-          </div>
-          <div className="bg-[#ebebeb] px-2 py-1 rounded-lg">
-            <h3 className="font-semibold text-[20px] text-[#0f47ad]">
-              Horas Reportadas
-            </h3>
-            <span className="font-semibold">6</span>
+        <div className="my-5 grid grid-cols-1 gap-y-3 justify-items-center">
+          <div className="bg-[#ebebeb] w-[90%] px-2 py-1 rounded-lg justify-items-center">
+            {serviceInfo.length > 0 ? (
+              serviceInfo.map((service) => {
+                return (
+                  <ServiceCard
+                    servicio={service}
+                    action={handleClick}
+                    key={service?.id}
+                  />
+                );
+              })
+            ) : (
+              <div className="text-[24px] font-semibold text-[#772727]">
+                No hay datos para mostrar
+              </div>
+            )}
           </div>
         </div>
       </div>
+      <UserServiceInfo isOpen={isOpenInfo} handleClose={handleClick} />
     </div>
   );
 }
