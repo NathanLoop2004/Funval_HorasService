@@ -18,7 +18,6 @@ export default function Profile() {
                 } else if (role === "student") {
                     navigate("/home");
                     window.scrollTo(0, 0)
-
                 }
                 else {
                     navigate("/forbiden");
