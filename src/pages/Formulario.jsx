@@ -11,6 +11,7 @@ export default function ServiceHoursReportForm() {
 
   const handleNavigateHome = () => {
     navigate("/");
+    window.scrollTo(0,0)
   };
 
 

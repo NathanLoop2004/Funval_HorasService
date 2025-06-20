@@ -9,12 +9,14 @@ import ServiceHoursReportForm from "./pages/Formulario";
 import ReviewServices from "./pages/ReviewServices";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
+import { Navigate } from "react-router";
 
 export default function App() {
 
   return (
     <>
       <Routes>
+        <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/login" element={<Login />} />
         <Route element={<AuthLayout />}>
           <Route path="/home" element={<Home />} />
@@ -27,5 +29,10 @@ export default function App() {
         <Route path="/forbiden" element={<Forbidden />} />
       </Routes>
     </>
+
   );
 }
+
+
+
+
