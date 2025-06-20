@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { DatosDeUsuarioID } from "../../axios/Formulario";
 
-export default function UserInfo({ isOpen, closeModal }) {
+export default function UserInfo({ isOpen, closeModal, userId }) {
   const [enableEdit, setenableEdit] = useState(false);
 
+    console.log("userId recibido:", userId);
   const handleEdit = () => {
     setenableEdit((prev) => {
       return !prev;
@@ -12,6 +14,34 @@ export default function UserInfo({ isOpen, closeModal }) {
   const handleClose = () => {
     closeModal();
   };
+
+
+ 
+
+const [infoUsuarios, setInfoUsuarios] = useState([]);
+        
+       
+useEffect(() => {
+  async function fetchData() {
+    try {
+      if (userId) {
+  const data = await DatosDeUsuarioID(userId);
+  console.log("Datos recibidos:", data);
+  setInfoUsuarios(data);
+}
+    } catch (error) {
+      console.log("Error al obtener datos:", error);
+    }
+  }
+  fetchData();
+}, [userId]);
+
+
+
+
+
+
+
 
   return (
     <div

@@ -14,6 +14,17 @@ export default function ListUsers() {
     });
   };
 
+  const [selectedUserId, setSelectedUserId] = useState(null);
+
+const handleClickID = (id) => {
+  setSelectedUserId(String(id));
+  console.log(selectedUserId)
+  setIsOpen(true);
+  
+  // Aquí puedes hacer lo que quieras con el id
+  console.log("ID del usuario clickeado:", id);
+};
+
    const [infoUsuarios, setInfoUsuarios] = useState([]);
       
      
@@ -54,10 +65,18 @@ export default function ListUsers() {
       
     
       <div className="w-[90%] bg-[#ebebeb] min-h-[180px] rounded-lg grid grid-cols-1 justify-items-center max-w-[650px] pb-3">
-      { infoUsuarios.map(usuarios => <UserCard action={handleClick} usuarios={usuarios} />)  }
+      {infoUsuarios.map(usuarios => (
+        <UserCard
+          key={usuarios.id}
+          userId={usuarios.id}
+          action={() => handleClickID(usuarios.id)}
+          onClick={handleClick}
+          usuarios={usuarios}
+        />
+      ))}
         
       </div>
-      <UserInfo isOpen={isOpen} closeModal={handleClick} />
+     {  <UserInfo isOpen={isOpen} closeModal={handleClick} userId={selectedUserId} />}
       <button className="w-[50%] py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition duration-200 mt-10 mb-10" onClick={handleNavigateHome}>
         Voler al Inicio
       </button>

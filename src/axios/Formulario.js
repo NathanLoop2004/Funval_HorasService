@@ -52,3 +52,14 @@ export async function TraerUsuarios() {
         throw error
     }
 }
+
+
+export async function DatosDeUsuarioID(userId) {
+    try {
+        const { data } = await instanceForm.get(`/users/${userId}`);
+        console.log(data);
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
