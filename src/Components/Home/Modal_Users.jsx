@@ -17,18 +17,6 @@ export default function Modal_Users({ toggleModal, datos }) {
     navigate("/profile")
   };
 
-  async function handleLogout() {
-    try {
-      const status = await logout()
-      if (status === 200) {
-        navigate("/login")
-      }
-    } catch (error) {
-      console.log(error)
-    }
-
-  }
-
   useEffect(() => {
     if (save === true) {
       setTimeout(() => {
@@ -95,45 +83,6 @@ export default function Modal_Users({ toggleModal, datos }) {
           )}
 
 
-          {/* Button Changes Datos */}
-          <div className='w-[100%] border-black h-[40px] mt-15'>
-            <button className="flex flex-row w-[120px] h-[45px] cursor-pointer bg-[#317ae2]    hover:bg-[#013c8f] rounded-[11px] items-center p-3 gap-1  ml-15">
-              <h1 className='text-[8px] text-white font-bold ml-2'>CAMBIAR DATOS</h1>
-              <img src="/icons8-actualizar-30.png" alt="" className='w-[20px] h-[20px]' />
-            </button>
-          </div>
-
-
-
-          <MiComponente />
-
-
-          {/* gmail del usuario */}
-          <div className='flex flex-row  w-[100%] h-[20px] border-black relative'>
-            <input
-              type="text"
-              {...register("email")}
-              placeholder="Email"
-              readOnly
-              className="text-[16px] text-[#2c2c2ce0] ml-5 font-semibold border-white"
-            />
-            {/* <h1 className='text-[16px] text-[#2c2c2ce0] ml-5 font-semibold border-white' >Jinderloop@gmail.com</h1> */}
-            <img className=' w-[20px] h-[20px] absolute right-4 mt-1' src='/logo_gmail.png' />
-          </div>
-
-          {/* numero de telefono del usuario */}
-          <div className='flex flex-row  w-[100%] h-[20px] mt-2 border-black  relative'>
-            <input
-              type="text"
-              {...register("phone")}
-              placeholder="Teléfono"
-              className="text-[13px] text-[#bd9100e0] ml-5 font-semibold border-white"
-            />
-            {/* <h1 className='text-[13px] text-[#bd9100e0] ml-5 font-semibold border-white'>+595 981 048195</h1> */}
-            <img src='/whatsapp.png' className='w-[20px] h-[20px] absolute right-4' />
-          </div>
-
-
           {/* Button Changes Datos y Logout*/}
           <div className='w-[100%] border-black h-[40px] mt-15'>
             <button
@@ -142,11 +91,10 @@ export default function Modal_Users({ toggleModal, datos }) {
               <h1 className='text-[8px] text-white font-bold ml-2'>CAMBIAR DATOS</h1>
               <img src="/icons8-actualizar-30.png" alt="" className='w-[20px] h-[20px]' />
             </button>
-            <br />
-            <button className="flex flex-row w-[120px] h-[45px] cursor-pointer bg-[#317ae2] hover:bg-[#013c8f] rounded-[11px] items-center px-7 gap-1  ml-15 text-white " onClick={handleLogout}>
-              Logout
-            </button>
+
           </div>
+
+          <MiComponente />
 
         </section >
       </div >

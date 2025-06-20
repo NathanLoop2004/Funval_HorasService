@@ -21,8 +21,10 @@ export default function ReviewServices() {
     });
   };
 
- const handleNavigateHomeAdmin = () => {
+  const handleNavigateHomeAdmin = () => {
     navigate("/admin");
+    window.scrollTo(0, 0)
+
   };
 
   const [infoUsuarios, setInfoUsuarios] = useState([]);
