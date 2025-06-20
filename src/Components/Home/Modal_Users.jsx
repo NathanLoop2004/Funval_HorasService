@@ -1,74 +1,125 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router"
+import { profile } from "../../axios/auth"
+import { logout } from "../../axios/auth"
 
-export default function Modal_Users({toggleModal}) {
-  
+export default function Modal_Users({ toggleModal }) {
+
+  const { register } = useForm({ defaultValues: async () => await profile() })
+  const [save, setSave] = useState(false)
+  const navigate = useNavigate()
+
+  const handleGoToProfile = () => {
+    toggleModal();
+    navigate("/profile")
+  };
+
+  async function handleLogout() {
+    try {
+      const status = await logout()
+      if (status === 200) {
+        navigate("/login")
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+  useEffect(() => {
+    if (save === true) {
+      setTimeout(() => {
+        setSave(false);
+      }, 3000);
+    }
+  }, [save]);
+
+
 
   const handleClose = (event) => {
-    if(event.target.classList.contains("bg-black/50")){
+    if (event.target.classList.contains("bg-black/50")) {
       toggleModal()
     }
   }
   return (
-<div className='bg-black/50 w-full h-full fixed z-10' onClick={handleClose}>
+    <div className='bg-black/50 w-full h-full fixed z-10' onClick={handleClose}>
 
-    <div className='bg-white w-[240px] h-[500px] z-10 right-[-10px] mt-[-5px] rounded-[10px] fixed '>
-         <section className='flex flex-col'>
-          
+      <div className='bg-white w-[300px] h-[550px] z-10 right-[-10px] mt-[-5px] rounded-[10px] fixed '>
+        <section className='flex flex-col'>
+
           {/* Botton de cerrar */}
-          <div className='w-[100%] h-[40px]  border-black flex justify-end'onClick={toggleModal} >
+          <div className='w-[100%] h-[40px]  border-black flex justify-end' onClick={toggleModal} >
             <button className=' border-black mr-5 mt-5 cursor-pointer'>
-          <img src='/icons8-cerrar.png' className='h-[30px] w-[30px] '/>
-          </button>
+              <img src='/icons8-cerrar.png' className='h-[30px] w-[30px] ' />
+            </button>
           </div>
-          
+
 
 
           {/* Logotipo Funval */}
-            <img src='/Funval-Photoroom.png' className='w-[210px] h-[80px] mt-2 ml-2 '/>
+          <img src='/Funval-Photoroom.png' className='w-[210px] h-[80px] mt-2 ml-2 ' />
 
 
-            {/* Foto de perfil del usuario */}
-             <div className='  w-[160px] h-[130px] ml-8  flex  justify-center items-center'>
-               <img src='/Gatito.jpg' className=' w-[120px] h-[120px] rounded-full  object-cover'/>
-             </div>
-
-
-             {/* Nombre del usuario */}
-           <div className='flex flex-row  border-black relative'>
-             <h1 className='text-[22px] text-[#4e4e4ee0] font-semibold ml-5 mt-3  border-white '>NathanLoop2004</h1>
-            <img className='w-[20px] h-[25px] shadow-none border-white mt-4 right-4 absolute' src='/FunvalFlechita.webp'></img>
-           </div>
-
-
-           {/* gmail del usuario */}
-           <div className='flex flex-row  w-[100%] h-[20px] border-black relative'>
-            <h1 className='text-[16px] text-[#2c2c2ce0] ml-5 font-semibold border-white' >Jinderloop@gmail.com</h1>
-            <img className=' w-[20px] h-[20px] absolute right-4 mt-1' src='/logo_gmail.png'/>
-           </div>
-
-              {/* numero de telefono del usuario */}
-           <div className='flex flex-row  w-[100%] h-[20px] mt-2 border-black  relative'>
-              <h1 className='text-[13px] text-[#bd9100e0] ml-5 font-semibold border-white'>+595 981 048195</h1>
-              <img src='/whatsapp.png' className='w-[20px] h-[20px] absolute right-4'/>
-           </div>
-
-
-          {/* Button Changes Datos */}
-          <div className='w-[100%] border-black h-[40px] mt-15'>
-              <button className="flex flex-row w-[120px] h-[45px] cursor-pointer bg-[#317ae2]    hover:bg-[#013c8f] rounded-[11px] items-center p-3 gap-1  ml-15">
-                <h1 className='text-[8px] text-white font-bold ml-2'>CAMBIAR DATOS</h1>
-                <img src="/icons8-actualizar-30.png" alt="" className='w-[20px] h-[20px]'/>
-              </button>
+          {/* Foto de perfil del usuario */}
+          <div className='  w-[160px] h-[130px] ml-8  flex  justify-center items-center'>
+            <img src='/Gatito.jpg' className=' w-[120px] h-[120px] rounded-full  object-cover' />
           </div>
-            
 
 
+          {/* Nombre del usuario */}
+          <div className='flex flex-row  border-black relative'>
+            <input type="text"
+              className="text-[19px] text-[#4e4e4ee0] font-semibold ml-5 mt-3  border-white"
+              {...register("full_name")}
+              readOnly />
+            {/* <h1 className='text-[22px] text-[#4e4e4ee0] font-semibold ml-5 mt-3  border-white '>NathanLoop2004</h1> */}
+            <img className='w-[20px] h-[25px] shadow-none border-white mt-4 right-4 absolute' src='/FunvalFlechita.webp'></img>
+          </div>
 
 
+          {/* gmail del usuario */}
+          <div className='flex flex-row  w-[100%] h-[20px] border-black relative'>
+            <input
+              type="text"
+              {...register("email")}
+              placeholder="Email"
+              readOnly
+              className="text-[16px] text-[#2c2c2ce0] ml-5 font-semibold border-white"
+            />
+            {/* <h1 className='text-[16px] text-[#2c2c2ce0] ml-5 font-semibold border-white' >Jinderloop@gmail.com</h1> */}
+            <img className=' w-[20px] h-[20px] absolute right-4 mt-1' src='/logo_gmail.png' />
+          </div>
+
+          {/* numero de telefono del usuario */}
+          <div className='flex flex-row  w-[100%] h-[20px] mt-2 border-black  relative'>
+            <input
+              type="text"
+              {...register("phone")}
+              placeholder="Teléfono"
+              className="text-[13px] text-[#bd9100e0] ml-5 font-semibold border-white"
+            />
+            {/* <h1 className='text-[13px] text-[#bd9100e0] ml-5 font-semibold border-white'>+595 981 048195</h1> */}
+            <img src='/whatsapp.png' className='w-[20px] h-[20px] absolute right-4' />
+          </div>
 
 
-         </section>
+          {/* Button Changes Datos y Logout*/}
+          <div className='w-[100%] border-black h-[40px] mt-15'>
+            <button
+              onClick={handleGoToProfile}
+              className="flex flex-row w-[120px] h-[45px] cursor-pointer bg-[#317ae2] hover:bg-[#013c8f] rounded-[11px] items-center p-3 gap-1  ml-15">
+              <h1 className='text-[8px] text-white font-bold ml-2'>CAMBIAR DATOS</h1>
+              <img src="/icons8-actualizar-30.png" alt="" className='w-[20px] h-[20px]' />
+            </button>
+            <br />
+            <button className="flex flex-row w-[120px] h-[45px] cursor-pointer bg-[#317ae2] hover:bg-[#013c8f] rounded-[11px] items-center px-7 gap-1  ml-15 text-white " onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+
+        </section>
+      </div>
     </div>
-</div>
   )
 }
