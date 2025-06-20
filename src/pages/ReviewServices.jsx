@@ -1,17 +1,41 @@
 /* Componente creado por Tomás */
 
 import ServiceReportedCard from "../Components/Admin/ServiceReportedCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ServiceReportedInfo from "../Components/Admin/ServiceReportedInfo";
+import { TraerUsuarios } from "../axios/Formulario";
 
 export default function ReviewServices() {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = () => {
-    setIsOpen((prev) => {
-      return !prev;
-    });
-  };
+  const [selectedUserId, setSelectedUserId] = useState(null);
+
+const handleClick = (id) => {
+  setSelectedUserId(selectedUserId);
+  
+  // Aquí puedes hacer lo que quieras con el id
+  console.log("ID del usuario clickeado:", id);
+};
+
+  const [infoUsuarios, setInfoUsuarios] = useState([]);
+        
+       
+         useEffect(() => {
+           async function fetchData() {
+             try {
+               const data = await TraerUsuarios();
+            
+               setInfoUsuarios(data);
+             } catch (error) {
+               console.log("Error al obtener datos:", error);
+             }
+           }
+           fetchData();
+         }, []);
+
+
+
+
+
 
   return (
     <div className="grid grid-cols-1 justify-items-center">
@@ -53,12 +77,15 @@ export default function ReviewServices() {
         </select>
       </div>
       <div className="w-[90%] bg-[#ebebeb] min-h-[180px] rounded-lg grid grid-cols-1 justify-items-center max-w-[650px] pb-3">
-        <ServiceReportedCard action={handleClick} />
-        <ServiceReportedCard action={handleClick} />
-        <ServiceReportedCard action={handleClick} />
-        <ServiceReportedCard action={handleClick} />
+         {infoUsuarios.map(usuarios => (
+  <ServiceReportedCard
+    key={usuarios.id}
+    action={() => handleClick(usuarios.id)}
+    usuarios={usuarios}
+  />
+))}
       </div>
-      <ServiceReportedInfo isOpen={isOpen} handleClose={handleClick} />
+      
     </div>
   );
 }

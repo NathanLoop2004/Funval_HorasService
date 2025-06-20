@@ -31,6 +31,15 @@ export async function ServiciosHechos() {
         throw error
     }
 }
+export async function ServiciosHechosID() {
+  try {
+        const { data } = await instanceForm.get('/services')
+        console.log(data)
+        return data
+    } catch (error) {
+        throw error
+    }
+}
 
 
 export async function TraerUsuarios() {
